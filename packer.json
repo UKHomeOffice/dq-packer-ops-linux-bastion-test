@@ -31,7 +31,7 @@
       ],
       "ssh_username": "centos",
       "instance_type": "t2.medium",
-      "ami_name": "dq-linux-bastion {{isotime | clean_ami_name}}",
+      "ami_name": "dq-linux-bastion {{isotime | clean_ami_name}}"
     }
   ],
   "provisioners": [
