@@ -1,0 +1,28 @@
+
+pipeline:
+
+  linux-packer-validate:
+    image: quay.io/ukhomeofficedigital/dq-packer-ansible
+    commands:
+      - export HOME=/home/packer
+      - packer validate packer.json
+
+  linux-packer-inspect:
+    image: quay.io/ukhomeofficedigital/dq-packer-ansible
+    commands:
+      - export HOME=/home/packer
+      - packer inspect packer.json
+
+  linux-packer-build:
+    image: quay.io/ukhomeofficedigital/dq-packer-ansible
+    commands:
+      - export HOME=/home/packer
+      - export aws_access_key_id=$$AWS_ACCESS_KEY_ID
+      - export aws_secret_access_key=$$AWS_SECRET_ACCESS_KEY
+      - packer build packer.json
+    secrets:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+    when:
+      event: push
+
